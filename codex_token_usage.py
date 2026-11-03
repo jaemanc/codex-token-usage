@@ -14,7 +14,7 @@ KEYS = ('input_tokens', 'cached_input_tokens', 'output_tokens')
 
 def local_time(value):
     if not value:
-        return '진행 중'
+        return 'In progress'
     return datetime.fromisoformat(value.replace('Z', '+00:00')).astimezone().strftime('%m-%d %H:%M:%S')
 
 def prompt_lines(text, width, limit):
@@ -139,16 +139,16 @@ def main():
         wr.writerows(valid)
     width = max(30, shutil.get_terminal_size(fallback=(100, 24)).columns - 5)
     for i, r in enumerate(valid, 1):
-        prompt = re.sub(r'\s+', ' ', re.sub(r'</?image\b[^>]*>', lambda m: '' if m.group().startswith('</') else '[이미지]', r['prompt'])).strip()
-        print(f"{i:>3}. 작성 {local_time(r['prompt_time'])} → 응답 {local_time(r['response_time'])}")
+        prompt = re.sub(r'\s+', ' ', re.sub(r'</?image\b[^>]*>', lambda m: '' if m.group().startswith('</') else '[image]', r['prompt'])).strip()
+        print(f"{i:>3}. Prompt {local_time(r['prompt_time'])} → Response {local_time(r['response_time'])}")
         for line in prompt_lines(prompt, width, args.chars):
             print(f"     {line}")
-        print(f"     입력 {r['input']:,} (캐시 {r['cached']:,}, 신규 {r['new_input']:,})  출력 {r['output']:,}  합계 {r['total']:,}  이벤트 {r['events']}")
-        for label, delta_key, used_key in (('5시간', 'five_hour_percent', 'five_hour_used_percent'),
-                                           ('7일', 'seven_day_percent', 'seven_day_used_percent')):
-            delta = f"+{r[delta_key]:.1f}%p" if r[delta_key] != '' else '기록 없음'
-            used = f"{r[used_key]:.1f}%" if r[used_key] != '' else '기록 없음'
-            print(f"     {label} 한도: 이번 요청 {delta} · 누적 {used}")
+        print(f"     Input {r['input']:,} (cached {r['cached']:,}, new {r['new_input']:,})  Output {r['output']:,}  Total {r['total']:,}  Events {r['events']}")
+        for label, delta_key, used_key in (('5-hour', 'five_hour_percent', 'five_hour_used_percent'),
+                                           ('7-day', 'seven_day_percent', 'seven_day_used_percent')):
+            delta = f"+{r[delta_key]:.1f}%p" if r[delta_key] != '' else 'Unavailable'
+            used = f"{r[used_key]:.1f}%" if r[used_key] != '' else 'Unavailable'
+            print(f"     {label} limit: this prompt {delta} · cumulative {used}")
     print(f'\n{len(valid)} matched prompts; {len(records)-len(valid)} prompts without measurable token deltas omitted; TSV: {args.output}', file=sys.stderr)
     if not valid:
         print('No matched records: actual JSONL may use a different token or prompt schema.', file=sys.stderr)
