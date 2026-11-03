@@ -25,4 +25,17 @@ No network requests or third-party Python packages are used. The script only rea
 
 ## Codex skill
 
-Clone the repository directly into `~/.codex/skills/codex-token-usage`, then start a new Codex conversation and ask for your Codex token usage or invoke `$codex-token-usage`. The skill runs this local script on demand. It does not automatically append a footer to every Codex response; that requires a separate client or hook integration.
+### Plugin installation (recommended)
+
+```bash
+codex plugin marketplace add jaemanc/codex-token-usage
+codex plugin add codex-token-usage@codex-token-usage
+```
+
+Start a new Codex conversation, then ask for your Codex token usage or invoke `$codex-token-usage`. The plugin runs the local script on demand. You can also open Codex's plugin browser after adding the marketplace and install it there.
+
+### Standalone skill
+
+Clone the repository directly into `~/.codex/skills/codex-token-usage` if you prefer a plain skill without the plugin marketplace.
+
+Neither installation method automatically appends a footer to every Codex response; that requires a separate client or hook integration.
