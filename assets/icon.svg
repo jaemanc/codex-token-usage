@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" role="img" aria-label="Codex Token Usage">
+  <rect width="128" height="128" rx="28" fill="#12355B"/>
+  <rect x="27" y="75" width="15" height="27" rx="4" fill="#78DCCA"/>
+  <rect x="50" y="55" width="15" height="47" rx="4" fill="#78DCCA"/>
+  <rect x="73" y="35" width="15" height="67" rx="4" fill="#78DCCA"/>
+  <circle cx="97" cy="31" r="11" fill="#F9C74F"/>
+</svg>
