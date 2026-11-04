@@ -25,6 +25,13 @@ No network requests or third-party Python packages are used. The script only rea
 
 ## Codex skill
 
+### Public Plugin Directory submission
+
+This package is a Desktop only, skills-only plugin because it reads local Codex logs through Python. Its listing metadata, icon, [privacy policy](PRIVACY.md), [support page](SUPPORT.md), and [terms](TERMS.md) are included in the repository. The submission ZIP is built from the plugin root and uploaded as **Skills only** in the [OpenAI plugin submission portal](https://platform.openai.com/plugins). Developer identity verification, portal checks, review, and publication are separate steps.
+
+After publication, users can install it from the ChatGPT desktop Plugin Directory. It runs on demand in a local thread; it does not add a footer to every response.
+
+
 ### Plugin installation (recommended)
 
 ```bash
